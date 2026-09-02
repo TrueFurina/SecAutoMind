@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SecAutoMind — 自主决策多智能体攻防推演平台</title>
+<meta name="description" content="SecAutoMind：基于大模型的自主决策通用网络安全智能体（2026 挑战杯 XH-202609）。离线部署，下载即用。">
+<meta property="og:title" content="SecAutoMind — 自主决策多智能体攻防推演平台">
+<meta property="og:description" content="3 层编排 × 90 工具 × 16 Agent，离线部署的安全 AI 作战指挥舱。">
+<style>
+:root {
+  --bg: #0a1128; --panel: #111c33; --panel2: #0e1830;
+  --ink: #e8ecf3; --muted: #7a8bb0; --line: #233454;
+  --acc: #00ff9d; --acc2: #00b3ff; --warn: #ffb454;
+  --danger: #ff5470;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.6; }
+a { color: var(--acc2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Nav ── */
+nav { position: sticky; top: 0; z-index: 50; background: rgba(10,17,40,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.logo { font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: .5px; }
+.logo span { color: var(--acc); }
+.nav-links a { color: var(--muted); margin-left: 24px; font-size: 14px; }
+.nav-links a:hover { color: var(--acc); }
+
+/* ── Hero ── */
+.hero { padding: 90px 0 70px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; top: -220px; right: -160px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(0,179,255,.16), transparent 65%); }
+.hero::after { content: ""; position: absolute; bottom: -200px; left: -140px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,157,.10), transparent 65%); }
+.badge { display: inline-block; background: rgba(0,179,255,.12); color: var(--acc2); border: 1px solid rgba(0,179,255,.35); border-radius: 999px; padding: 6px 16px; font-size: 13px; margin-bottom: 22px; letter-spacing: .5px; }
+.hero h1 { font-size: 54px; font-weight: 800; letter-spacing: 1px; }
+.hero h1 em { font-style: normal; color: var(--acc); }
+.hero .sub { color: var(--muted); font-size: 19px; margin: 18px auto 10px; max-width: 640px; }
+.hero .sub2 { color: var(--muted); font-size: 15px; max-width: 680px; margin: 0 auto 34px; }
+
+.dl { position: relative; z-index: 2; }
+.btn-download {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, var(--acc), #00d68f);
+  color: #04120c; font-size: 21px; font-weight: 800;
+  padding: 18px 46px; border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0,255,157,.28);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-download:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,255,157,.4); text-decoration: none; color: #04120c; }
+.btn-download .v { font-size: 13px; font-weight: 600; opacity: .75; }
+.btn-download svg { width: 26px; height: 26px; }
+.dl-meta { margin-top: 14px; color: var(--muted); font-size: 13px; }
+.dl-meta code { background: var(--panel); border: 1px solid var(--line); padding: 2px 8px; border-radius: 6px; color: var(--acc); font-size: 12px; }
+
+/* ── Sections ── */
+section { padding: 64px 0; }
+.section-head { text-align: center; margin-bottom: 44px; }
+.section-head .tag { display: inline-block; color: var(--acc); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+.section-head h2 { font-size: 34px; font-weight: 800; }
+.section-head p { color: var(--muted); margin-top: 10px; font-size: 15px; }
+
+/* ── Feature cards ── */
+.grid { display: grid; gap: 22px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; transition: transform .15s, border-color .15s; }
+.card:hover { transform: translateY(-3px); border-color: rgba(0,255,157,.4); }
+.card h3 { font-size: 18px; margin-bottom: 12px; }
+.card h3 .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 10px; }
+.card p { color: var(--muted); font-size: 14px; }
+.card ul { list-style: none; margin-top: 6px; }
+.card li { color: var(--muted); font-size: 13px; padding: 4px 0 4px 18px; position: relative; }
+.card li::before { content: "▸"; position: absolute; left: 0; color: var(--acc); }
+
+/* ── Stats ── */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 40px 0 10px; }
+.stat { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; text-align: center; padding: 22px 10px; }
+.stat .num { font-size: 38px; font-weight: 800; color: var(--acc); }
+.stat .lbl { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+/* ── Install steps ── */
+.steps { counter-reset: step; }
+.step { display: flex; gap: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; align-items: flex-start; }
+.step .n { flex: 0 0 38px; height: 38px; border-radius: 50%; background: var(--acc); color: #04120c; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.step h4 { font-size: 16px; margin-bottom: 4px; }
+.step p { color: var(--muted); font-size: 14px; }
+.step code { background: var(--panel2); border: 1px solid var(--line); padding: 2px 8px; border-radius: 6px; color: var(--acc); font-size: 13px; }
+.warnbox { border: 1px solid rgba(255,180,84,.4); background: rgba(255,180,84,.07); border-radius: 12px; padding: 16px 20px; font-size: 14px; color: var(--warn); margin-top: 14px; }
+
+/* ── FAQ / legal ── */
+.legal { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.legal h3 { font-size: 16px; margin-bottom: 10px; color: var(--ink); }
+.legal p, .legal li { color: var(--muted); font-size: 13px; }
+.legal ul { padding-left: 20px; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--line); padding: 34px 0 40px; text-align: center; color: var(--muted); font-size: 13px; }
+footer .f-logo { color: var(--ink); font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+footer a { color: var(--muted); }
+footer a:hover { color: var(--acc); }
+
+@media (max-width: 860px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { font-size: 38px; }
+  .nav-links a { margin-left: 12px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">Sec<span>Auto</span>Mind</div>
+    <div class="nav-links">
+      <a href="#features">核心能力</a>
+      <a href="#install">下载部署</a>
+      <a href="#legal">声明</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="container">
+    <span class="badge">2026 CHALLENGE CUP · XH-202609 · 揭榜挂帅</span>
+    <h1>Sec<em>Auto</em>Mind</h1>
+    <p class="sub">自主决策 · 多智能体协同 · 全链路攻防推演平台</p>
+    <p class="sub2">基于大模型的自主决策通用网络安全智能体 —— 3 层编排 × 90 工具 × 16 Agent，<br>适配学生笔记本本地离线部署，下载即用，无需云端算力。</p>
+    <div class="dl">
+      <a class="btn-download" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.17/secautomind-ai.exe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        立即下载 <span class="v">v1.7.17</span>
+      </a>
+      <div class="dl-meta">Windows 64-bit · 144 MB · <code>secautomind-ai.exe</code></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ STATS ═══════════ -->
+<section style="padding-top:10px;">
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><div class="num">17,927</div><div class="lbl">行 Go 代码</div></div>
+      <div class="stat"><div class="num">90</div><div class="lbl">安全工具</div></div>
+      <div class="stat"><div class="num">16</div><div class="lbl">场景 Agent</div></div>
+      <div class="stat"><div class="num">223</div><div class="lbl">测试文件</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag">Core Capabilities</div>
+      <h2>核心能力</h2>
+      <p>不只是工具集合，是能自主决策的安全 AI 作战指挥舱</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3><span class="dot" style="background:var(--acc)"></span>自主决策 · 三层编排</h3>
+        <ul>
+          <li>Deep / Plan-Execute / Supervisor 三种编排模式</li>
+          <li>按任务复杂度自动选型，兼顾效率与成功率</li>
+          <li>Planner → Executor → Replanner 闭环纠偏</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--acc2)"></span>通用对抗 · 90 工具</h3>
+        <ul>
+          <li>网络扫描 / Web / 漏洞 / 云 / 容器 / 二进制 / 取证</li>
+          <li>16 个场景 Agent · 24 技能包全链路覆盖</li>
+          <li>YAML 自定义扩展，写配置即可接入新工具</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--warn)"></span>人机协同 · 可审计</h3>
+        <ul>
+          <li>敏感操作 HITL 人工审批，带倒计时与拒绝机制</li>
+          <li>工具白名单 + 审计 Agent 独立复核</li>
+          <li>全链路操作日志与证据留存，可回放</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INSTALL ═══════════ -->
+<section id="install">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag">Download & Install</div>
+      <h2>下载部署：三步跑起来</h2>
+      <p>Windows 电脑直接部署，无需 Docker、无需云端算力、无需配置环境</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div>
+          <h4>下载可执行文件</h4>
+          <p>点击上方 <code>立即下载</code> 获取 <code>secautomind-ai.exe</code>（约 144 MB，Windows 64 位）。
+             也可从 <a href="https://github.com/TrueFurina/SecAutoMind/releases">GitHub Releases</a> 下载历史版本与校验文件。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div>
+          <h4>双击启动（首次需放行 SmartScreen）</h4>
+          <p>Windows 可能提示「已保护你的电脑 / 未知发布者」——点击 <code>更多信息</code> → <code>仍要运行</code>。
+             首次启动会自动生成管理员初始密码（仅显示一次，请立即保存并登录后修改）。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div>
+          <h4>打开浏览器使用</h4>
+          <p>启动后访问 <code>http://127.0.0.1:8080</code>，用生成的账号密码登录，
+             在「设置」中配置 AI 通道（可接入国内备案大模型，如通义千问），即可开始攻防推演。</p>
+        </div>
+      </div>
+    </div>
+    <div class="warnbox">
+      ⚠️ <strong>SmartScreen 提示说明</strong>：程序为独立开发者自编译签名前的版本，首次运行 Windows 会拦截，属正常现象（非病毒）。
+      建议核对 SHA-256 校验值后再运行，校验文件见 <a href="https://github.com/TrueFurina/SecAutoMind/releases">Releases</a>。
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ QUICK FACTS ═══════════ -->
+<section id="about" style="background:var(--panel2);">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag">Architecture</div>
+      <h2>系统架构</h2>
+      <p>五层解耦 · 纵深防御 · 可离线运行</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="dot" style="background:var(--acc2)"></span>分层架构</h3>
+        <ul>
+          <li>Web 控制台：仪表盘 / 对话 / 资产 / 漏洞 / C2 / 审计回放</li>
+          <li>编排器：Deep / Plan-Execute / Supervisor（eino）</li>
+          <li>Agent 层：规划 / 执行 / 审计 / 复盘 + 16 个场景角色</li>
+          <li>工具层：90 个 YAML 工具 + MCP Server + RBAC 授权</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--acc)"></span>安全设计</h3>
+        <ul>
+          <li>敏感操作 HITL 人工审批（倒计时 + 拒绝机制）</li>
+          <li>CORS 白名单 · SQL 全参数化 · 审计脱敏</li>
+          <li>国内备案模型经安全网关接入（合规）</li>
+          <li>离线自主决策：适配学生笔记本本地部署</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LEGAL ═══════════ -->
+<section id="legal">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag">Legal</div>
+      <h2>使用声明</h2>
+    </div>
+    <div class="legal">
+      <h3>授权与合规</h3>
+      <p>SecAutoMind 为 2026 年全国大学生信息安全作品赛（挑战杯赛道 · 赛题 XH-202609）参赛作品。</p>
+      <ul>
+        <li><strong>仅限授权环境使用</strong>：本工具仅可对您拥有或已获书面授权的系统、靶场与教学环境执行操作；禁止用于任何未授权目标。</li>
+        <li><strong>源码说明</strong>：本项目为参赛交付作品，源码不公开。本站仅提供官方分发的可执行文件与文档。</li>
+        <li><strong>LLM 接入</strong>：AI 通道需自行配置国内备案大模型的 API Key（如通义千问等），平台不含任何预置密钥。</li>
+        <li><strong>数据安全</strong>：本地 SQLite 存储，操作日志可审计、可脱敏、可回放；请妥善保管管理员凭据。</li>
+      </ul>
+    </div>
+    <div class="legal" style="margin-top:18px;">
+      <h3>反馈与联系方式</h3>
+      <p>项目主页：<a href="https://github.com/TrueFurina/SecAutoMind">github.com/TrueFurina/SecAutoMind</a> ·
+         问题反馈请通过 <a href="https://github.com/TrueFurina/SecAutoMind/issues">GitHub Issues</a> 提交。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="container">
+    <div class="f-logo">Sec<span style="color:var(--acc)">Auto</span>Mind</div>
+    <p>2026 Challenge Cup · 赛题 XH-202609 · 安恒信息揭榜挂帅</p>
+    <p>闽江学院 · 数学与数据科学学院（网络安全方向） · © 2026 TrueFurina</p>
+    <p style="margin-top:8px;"><a href="#top">返回顶部</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
