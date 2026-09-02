@@ -64,6 +64,17 @@ section{position:relative;padding:96px 0}
 .btn-ghost:hover{border-color:var(--blue);transform:translateY(-2px);text-decoration:none}
 .dl-meta{color:var(--dim);font-size:13px;margin-top:14px}
 .dl-meta code{background:rgba(255,255,255,.05);border:1px solid var(--line);padding:3px 9px;border-radius:7px;color:var(--acc);font-size:12px}
+/* platform download cards */
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:880px;margin:0 auto 20px}
+.dl-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;backdrop-filter:blur(8px);transition:transform .18s,border-color .18s,box-shadow .18s;position:relative}
+.dl-card:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+.dl-card .os{font-size:15px;font-weight:900;letter-spacing:.4px;color:var(--ink)}
+.dl-card .os small{display:block;font-size:11.5px;font-weight:600;color:var(--dim);margin-top:3px;letter-spacing:.2px}
+.dl-card .rec{position:absolute;top:-9px;right:12px;background:var(--grad);color:#04120c;font-size:10.5px;font-weight:900;padding:2px 9px;border-radius:99px;letter-spacing:.5px}
+.dl-card .btn{width:100%;justify-content:center;padding:11px 10px;font-size:13.5px;border-radius:11px;margin-top:11px}
+.dl-card .btn-ghost{margin-top:7px}
+.dl-card .btn svg{width:17px;height:17px}
+@media(max-width:760px){.dl-grid{grid-template-columns:1fr;max-width:380px}}
 
 /* number band */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:70px}
@@ -121,7 +132,7 @@ section{position:relative;padding:96px 0}
       <a href="#arch">技术架构</a>
       <a href="#innovation">技术创新</a>
       <a href="#evidence">实测证据</a>
-      <a href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.20/secautomind-ai.exe" class="cta">下载 v1.7.20</a>
+      <a href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.21/secautomind-ai.exe" class="cta">下载 v1.7.21</a>
     </div>
   </div>
 </nav>
@@ -139,15 +150,32 @@ section{position:relative;padding:96px 0}
       <span class="tagx"><i>▸</i>人机协同 HITL</span>
       <span class="tagx"><i>▸</i>离线可部署</span>
     </div>
-    <div class="hero-actions">
-      <a class="btn btn-dl" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.20/SecAutoMind-Setup-1.7.20-x64.exe">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        下载安装版 v1.7.20
-      </a>
-      <a class="btn btn-ghost" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.20/secautomind-ai.exe">免安装绿色版</a>
-      <a class="btn btn-ghost" href="#install">部署指南</a>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="rec">推荐</div>
+        <div class="os">Windows<small>10 / 11 · x64</small></div>
+        <a class="btn btn-dl" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.21/SecAutoMind-Setup-1.7.21-x64.exe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          安装版 · 32 MB
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.21/secautomind-ai.exe">绿色版 · 158.8 MB</a>
+      </div>
+      <div class="dl-card">
+        <div class="os">Linux<small>amd64 · x86_64</small></div>
+        <a class="btn btn-dl" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.21/secautomind-ai-linux-amd64">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          下载 Linux 版
+        </a>
+      </div>
+      <div class="dl-card">
+        <div class="os">macOS<small>Apple Silicon · arm64</small></div>
+        <a class="btn btn-dl" href="https://github.com/TrueFurina/SecAutoMind/releases/download/v1.7.21/secautomind-ai-macos-arm64">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          下载 macOS 版
+        </a>
+      </div>
     </div>
-    <div class="dl-meta">安装版 32.0 MB（推荐，选目录安装+桌面快捷方式） · 绿色版 158.8 MB（解压即用） · SHA-256 见 Releases</div>
+    <div class="dl-meta">Windows 安装版推荐（选目录安装+桌面快捷方式） · Linux/macOS 为命令行运行 · SHA-256 见 Releases · <a href="#install" style="color:var(--acc)">部署指南</a></div>
 
     <div class="stats">
       <div class="stat"><div class="num">17,927</div><div class="lbl">行 Go 工程代码</div></div>
@@ -306,18 +334,18 @@ section{position:relative;padding:96px 0}
     <div class="grid3" style="grid-template-columns:1fr 1fr 1fr">
       <div class="card" style="text-align:center">
         <div style="width:52px;height:52px;border-radius:50%;background:var(--acc);color:#04120c;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">1</div>
-        <h3>下载</h3>
-        <p>点击右上「下载 v1.7.20」获取 <code>secautomind-ai.exe</code>（158.8 MB，Windows 64 位）</p>
+        <h3>选择平台</h3>
+        <p>顶部按平台下载：<b>Windows</b> 安装版（推荐，32 MB）或绿色版（158.8 MB）；<b>Linux</b> / <b>macOS</b> 为单文件可执行版（chmod +x 后运行）</p>
       </div>
       <div class="card" style="text-align:center">
         <div style="width:52px;height:52px;border-radius:50%;background:var(--blue);color:#04120c;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">2</div>
-        <h3>安装并启动</h3>
-        <p>跟随安装向导（自动创建桌面快捷方式）；若出现 SmartScreen 提示，点 <b>更多信息 → 仍要运行</b></p>
+        <h3>启动</h3>
+        <p>Windows：跟随安装向导（自动创建桌面快捷方式），SmartScreen 提示点 <b>更多信息 → 仍要运行</b>；Linux/macOS：<code>chmod +x secautomind-ai-linux-amd64 &amp;&amp; ./secautomind-ai-linux-amd64</code></p>
       </div>
       <div class="card" style="text-align:center">
         <div style="width:52px;height:52px;border-radius:50%;background:var(--violet);color:#fff;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">3</div>
-        <h3>自动打开界面</h3>
-        <p>安装完成后自动启动，浏览器自动打开 <code>http://127.0.0.1:8080</code>，用首次生成的账号密码登录</p>
+        <h3>登录使用</h3>
+        <p>启动后浏览器访问 <code>http://127.0.0.1:8080</code>；初始账号 <code>admin</code>，密码见安装目录 <code>data/admin_initial_password.txt</code>（仅首次生成）</p>
       </div>
     </div>
     <div style="margin-top:26px;background:rgba(255,180,84,.07);border:1px solid rgba(255,180,84,.35);border-radius:14px;padding:18px 22px;font-size:14px;color:var(--warn)">
