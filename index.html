@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SecAutoMind · 自主决策通用网络安全智能体</title>
-<meta name="description" content="SecAutoMind — 面向 2026 中国青年科技创新「揭榜挂帅」擂台赛（安恒信息 XH-202609）的自主决策多智能体网络安全平台。3 层编排 × 90 工具 × 16 Agent，离线可部署。">
+<meta name="description" content="SecAutoMind — 面向 2026 中国青年科技创新「揭榜挂帅」擂台赛（安恒信息 XH-202609）的自主决策多智能体网络安全平台。4 类 Agent × 91 YAML 工具 + 52 内置 MCP 工具（143 运行时）× 18 角色化 Agent / 13 RBAC 角色，离线可部署。">
 <meta property="og:title" content="SecAutoMind · 自主决策通用网络安全智能体">
-<meta property="og:description" content="3 层编排 × 90 工具 × 16 Agent — 让 AI 真正自主决策、通用对抗、人机可控。">
+<meta property="og:description" content="4 类 Agent × 143 运行时工具 × 18 角色化 Agent — 让 AI 真正自主决策、通用对抗、人机可控。">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a1128'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2300ff9d' font-family='Arial' font-weight='bold'>S</text></svg>">
 <style>
 :root{
@@ -178,10 +178,10 @@ section{position:relative;padding:96px 0}
     <div class="dl-meta">Windows 安装版推荐（选目录安装+桌面快捷方式） · Linux/macOS 为命令行运行 · SHA-256 见 Releases · <a href="#install" style="color:var(--acc)">部署指南</a></div>
 
     <div class="stats">
-      <div class="stat"><div class="num">17,927</div><div class="lbl">行 Go 工程代码</div></div>
-      <div class="stat"><div class="num">90+</div><div class="lbl">YAML 安全工具</div></div>
-      <div class="stat"><div class="num">16</div><div class="lbl">场景 Agent 角色</div></div>
-      <div class="stat"><div class="num">223</div><div class="lbl">自动化测试文件</div></div>
+      <div class="stat"><div class="num">125,998</div><div class="lbl">行 Go 工程代码</div></div>
+      <div class="stat"><div class="num">143</div><div class="lbl">运行时工具（91 YAML + 52 内置）</div></div>
+      <div class="stat"><div class="num">18</div><div class="lbl">场景 Agent 角色</div></div>
+      <div class="stat"><div class="num">268</div><div class="lbl">自动化测试文件</div></div>
     </div>
   </div>
 </header>
@@ -205,7 +205,7 @@ section{position:relative;padding:96px 0}
         <div class="ic ic-b">⚔️</div>
         <h3>多场景自主决策与执行</h3>
         <p>覆盖渗透测试 / 应急响应 / 漏洞挖掘 / 逆向分析，具备态势分析 → 目标设定 → 任务规划 → 策略动态调整的闭环</p>
-        <ul><li>Deep / Plan-Execute / Supervisor 三编排</li><li>16 角色 × 90 工具全链路</li></ul>
+        <ul><li>Deep / Plan-Execute / Supervisor 三编排</li><li>18 角色化 Agent × 143 运行时工具全链路</li></ul>
       </div>
       <div class="card">
         <div class="ic ic-v">🛡️</div>
@@ -222,7 +222,7 @@ section{position:relative;padding:96px 0}
     <div class="sh">
       <div class="idx">02 · ARCHITECTURE</div>
       <h2>五层解耦架构 · 纵深防御设计</h2>
-      <p>Web 控制台 → 编排器 → Agent 层 → 工具层 → 数据与安全，各层职责单一、边界清晰，17,927 行工程代码零 panic。</p>
+      <p>Web 控制台 → 编排器 → Agent 层 → 工具层 → 数据与安全，各层职责单一、边界清晰，125,998 行工程代码零 panic。</p>
     </div>
     <div class="arch">
       <div class="arch-row">
@@ -237,12 +237,12 @@ section{position:relative;padding:96px 0}
       <div class="arch-arrow">▼</div>
       <div class="arch-row">
         <div class="l" style="color:var(--violet)">Agent 层<small>智能体群</small></div>
-        <div class="r">规划 / 执行 / 审计 / 复盘 四类核心 Agent + 16 个场景角色（侦察 / 渗透 / 横向移动 / 提权 / 应急 / 取证…），共享「事实黑板」传递上下文</div>
+        <div class="r">规划 / 执行 / 审计 / 复盘 四类核心 Agent + 18 个场景角色（侦察 / 渗透 / 横向移动 / 提权 / 应急 / 取证…），共享「事实黑板」传递上下文</div>
       </div>
       <div class="arch-arrow">▼</div>
       <div class="arch-row">
         <div class="l" style="color:var(--warn)">工具层<small>能力底座</small></div>
-        <div class="r">90+ YAML 工具配方（网络 / Web / 漏洞 / 云 / 容器 / 二进制 / 取证 / 后渗透）+ MCP Server 协议 + 按角色 RBAC 授权</div>
+        <div class="r">91 YAML 工具配方 + 52 内置工具（网络 / Web / 漏洞 / 云 / 容器 / 二进制 / 取证 / 后渗透）+ MCP Server 协议 + 按角色 RBAC 授权</div>
       </div>
       <div class="arch-arrow">▼</div>
       <div class="arch-row">
@@ -274,7 +274,7 @@ section{position:relative;padding:96px 0}
       </div>
       <div class="card">
         <div class="ic ic-b">🧩</div>
-        <h3>创新二 · 90 工具 × 16 Agent 全链路通用对抗</h3>
+        <h3>创新二 · 143 运行时工具 × 18 Agent 全链路通用对抗</h3>
         <p>把碎片化安全工具统一为 YAML 配方 + MCP 协议，Agent 可编排调用、上下文共享，写一个 YAML 即可接入新工具。</p>
         <ul>
           <li>角色-工具映射，越权调用被拒</li>
@@ -302,23 +302,23 @@ section{position:relative;padding:96px 0}
     <div class="sh">
       <div class="idx">04 · VERIFICATION</div>
       <h2>实测证据：工程闭环不是纸面功夫</h2>
-      <p>以下全部为 2026-09-01 磁盘实测数据（Go 1.25.0 + CGO 环境），可现场复现。</p>
+      <p>以下全部为 2026-09-05 磁盘实测数据（Go 1.22.5 + CGO_ENABLED=0 纯 Go 环境），可现场复现。</p>
     </div>
     <div class="grid3">
       <div class="card" style="text-align:center">
         <div class="num" style="font-size:44px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">0</div>
         <h3 style="margin:8px 0 4px">编译错误</h3>
-        <p><code>go build ./... </code>全量 17,927 行零错误</p>
+        <p><code>go build ./... </code>全量 125,998 行零错误</p>
       </div>
       <div class="card" style="text-align:center">
-        <div class="num" style="font-size:44px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">24/26</div>
+        <div class="num" style="font-size:44px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">29/29</div>
         <h3 style="margin:8px 0 4px">测试包通过</h3>
-        <p>核心包全绿：multiagent / database / attackchain</p>
+        <p>全部含测试包全绿（0 FAIL）· 268 个测试文件 · CI 含 race 检测</p>
       </div>
       <div class="card" style="text-align:center">
-        <div class="num" style="font-size:44px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">200</div>
-        <h3 style="margin:8px 0 4px">启动即响应</h3>
-        <p>系统实启动 HTTP 200 · 8080 LISTENING</p>
+        <div class="num" style="font-size:44px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">18086</div>
+        <h3 style="margin:8px 0 4px">服务端口</h3>
+        <p>系统实启动 HTTP 200 · 端口 18086 监听</p>
       </div>
     </div>
   </div>
@@ -345,7 +345,7 @@ section{position:relative;padding:96px 0}
       <div class="card" style="text-align:center">
         <div style="width:52px;height:52px;border-radius:50%;background:var(--violet);color:#fff;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">3</div>
         <h3>登录使用</h3>
-        <p>启动后浏览器访问 <code>http://127.0.0.1:8080</code>；初始账号 <code>admin</code>，密码见安装目录 <code>data/admin_initial_password.txt</code>（仅首次生成）</p>
+        <p>启动后浏览器访问 <code>http://127.0.0.1:18086</code>；初始账号 <code>admin</code>，密码见安装目录 <code>data/admin_initial_password.txt</code>（仅首次生成）</p>
       </div>
     </div>
     <div style="margin-top:26px;background:rgba(255,180,84,.07);border:1px solid rgba(255,180,84,.35);border-radius:14px;padding:18px 22px;font-size:14px;color:var(--warn)">
