@@ -303,6 +303,11 @@ section{position:relative;padding:96px 0}
       <div class="idx">04 · VERIFICATION</div>
       <h2>实测证据：工程闭环不是纸面功夫</h2>
       <p>以下全部为 2026-09-05 磁盘实测数据（Go 1.22.5 + CGO_ENABLED=0 纯 Go 环境），可现场复现。</p>
+      <p style="font-size:13px;opacity:.75;margin-top:10px;line-height:1.7">
+        <b>题目来源声明</b>：基准集分两类 —— <b>真题 55 题</b>（公开 writeup 来源，每题带 source 与 flag_sha256，命中 <b>19/55 = 34.5%</b>）
+        + <b>自产题 85 题</b>（gen_*.py 生成 / 自建靶场 / 自造工件，覆盖率 100%，占 60.7%）。
+        自产题的高覆盖率只证明<b>工程链路可跑通</b>，不构成真实赛场竞争力证据；引用时请区分两类。
+      </p>
     </div>
     <div class="grid3">
       <div class="card" style="text-align:center">
