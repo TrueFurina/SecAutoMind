@@ -7,6 +7,7 @@
 | 源码 | [TrueFurina/SecAutoMind-src](https://github.com/TrueFurina/SecAutoMind-src) |
 | 下载 | [SecAutoMind-src Releases](https://github.com/TrueFurina/SecAutoMind-src/releases) |
 | 定位 | 面向**授权场景**的自主多智能体安全验证平台（赛事题号 XH-202609）：确定性工具优先，LLM 只在静态分析未命中时介入，敏感动作需人工审批 |
+| 诚实基础设施 | [honesty-ci-patterns](https://github.com/TrueFurina/honesty-ci-patterns) — 把「诚实」做成能 exit 1 的 CI 门禁，源自 marl-ecdsa 源码研究 |
 
 ## 为什么单独一个仓
 
